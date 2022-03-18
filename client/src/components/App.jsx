@@ -1,18 +1,43 @@
-import React from 'react';
-import movies from '../data/exampleMovieData.js';
+import React, {Component} from 'react';
+import Movies from './MovieList.jsx';
 
-@param {movies} object
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-const App = (props) => (
+    this.state = {
+      movies: [],
+      query: '',
+    }
+  }
 
+  updateSearch() {
+    this.setState({query});
+  }
+  addMovieToList() {
+    this.setState(); // finish this method
+    }
 
-  <div>
-    <h2>Movie List</h2>
-    {movies.map(movies => (
-      <p>{movies.title}</p>
-    ))}
-  </div>
+  componentDidMount() {
+    console.log('mounted')
+  }
 
-);
+  render() {
+    return (
+    <div>
+      <h1>Movie List</h1>
+      <form>
+      <label>
+      <input name='search' type='tex' placeholder='Search'/>
+      </label>
+      </form>
+      <button>Search</button>
+      <Movies movies={this.movies}/>
+    </div>
+    )
+  }
+}
 
 export default App;
+
+

@@ -10,29 +10,31 @@ class App extends Component {
       query: '',
     }
   }
-
-  updateSearch() {
-    this.setState({query});
+  // state update methods
+  updateQuery(query) {
+    this.setState(query);
   }
   addMovieToList() {
     this.setState(); // finish this method
     }
-
+  // default loading message
   componentDidMount() {
     console.log('mounted')
   }
-
+  // render elements to the page
+    // will individually render element per component class
+    // include search form
+    // include submit button
   render() {
     return (
     <div>
       <h1>Movie List</h1>
       <form>
       <label>
-      <input name='search' type='tex' placeholder='Search'/>
+      <input name='search' type='text' placeholder='Search'/>
       </label>
       </form>
       <button>Search</button>
-      <Movies movies={this.movies}/>
     </div>
     )
   }

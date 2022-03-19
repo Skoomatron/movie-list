@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Movie = ({movie}) => {
+const Movie = (props) => {
   return
   <li>
     <select>

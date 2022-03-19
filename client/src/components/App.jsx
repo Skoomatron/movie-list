@@ -7,21 +7,50 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
-      query: '',
+      movieArray: [],
+      movie: '',
+      search: '',
     }
-    this.updateQuery = this.updateQuery.bind(this);
+    // this.updateQuery = this.updateQuery.bind(this);
     this.addMovie = this.addMovieToList.bind(this);
+    this.submitSearch = this.submitSearch.bind(this);
+    this.submitMovie = this.submitMovie.bind(this);
+    this.textInput = this.textInput.bind(this);
   }
-
-  updateQuery(query) {
-    this.setState({query});
+  componentDidMount() {
+    console.log('Mounted')
   }
+  // updateQuery(query) {
+  //   this.setState({query});
+  // }
   addMovieToList(movie) {
     this.setState({movies: [...this.state.movies, {title: movie}]});
     }
-  componentDidMount() {
-    console.log('Mounted')
+
+
+  submitSearch(search) {
+    const currentSearch = this.state.search;
+    search.preventDefault();
+    console.log('search submitted', currentSearch);
+  }
+
+  submitMovie(input) {
+    let currentInput = this.state.movie;
+    let currentArray = [];
+    currentArray.push({title: currentInput});
+
+    input.preventDefault();
+
+    if (currentInput.length > 0) {
+      this.setState({movieArray: currentArray.concat(this.state.movieArray)});
+    } else {
+      console.error('Invalid Movie Title');
+    }
+    console.log(this.state.movieArray);
+  }
+
+  textInput(input) {
+    this.setState({[input.target.name]: input.target.value});
   }
 
 
@@ -32,7 +61,7 @@ class App extends React.Component {
       <h1>Movie List</h1>
       <AddMovie add={this.addMovie}/>
       <Search updateQuery={this.udpateQuery}/>
-      <Movies movies={this.state.movies}/>
+      <Movies />
     </div>
     )
   }

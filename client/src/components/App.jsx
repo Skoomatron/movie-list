@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieArray: [],
+      movieArray: [{title: 'Braveheart'}, {title: 'Elf'}, {title: 'Star Wars'}],
       movie: '',
       search: '',
     }
@@ -15,7 +15,6 @@ class App extends React.Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
     this.submitMovie = this.submitMovie.bind(this);
-    this.filterBySearch = this.filterBySearch.bind(this);
   }
 
   componentDidMount() {
@@ -34,20 +33,11 @@ class App extends React.Component {
 
   submitSearch(event) {
     event.preventDefault();
-
+    // how do I filter my array state without replacing it?
+      // send to server?
     var userMovies = this.state.movieArray;
-
-    var movieFilter = userMovies.filter(this.filterBySearch(userMovies));
-    console.log(movieFilter);
-  }
-
-  filterBySearch(array) {
-    var query = this.state.search;
-
-    for (var x = 0; x < array.length; x++) {
-      if (!array[x].title === query) {
-        return array[x];
-      }
+    for (var x = 0; x < userMovies.length; x++) {
+      console.log(userMovies[x].title);
     }
   }
 
@@ -56,14 +46,14 @@ class App extends React.Component {
 
     let currentInput = this.state.movie;
     let currentArray = [];
+
     currentArray.push({title: currentInput});
 
     if (currentInput.length > 0) {
       this.setState({movieArray: currentArray.concat(this.state.movieArray)});
-    } else {
+      } else {
     }
     this.setState({movie: ''});
-    console.log(this.state.movieArray);
   }
 
 

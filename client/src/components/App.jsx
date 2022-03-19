@@ -2,6 +2,7 @@ import React from 'react';
 import AddMovie from './AddMovie.jsx';
 import Search from './Search.jsx';
 import MovieList from './MovieList.jsx';
+import Watched from './Watched.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
       movieArray: [{title: 'Braveheart'}, {title: 'Elf'}, {title: 'Star Wars'}],
       movie: '',
       search: '',
+      watchedMovies: [{title: 'Beetlejuice'}],
     }
     this.updateMovie = this.updateMovie.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -67,6 +69,7 @@ class App extends React.Component {
       <AddMovie updateMovie={this.updateMovie} movie={this.state.movie} submitMovie={this.submitMovie}/>
       <Search updateSearch={this.updateSearch} search={this.state.search} submitSearch={this.submitSearch}/>
       <MovieList movieArray={this.state.movieArray} submitSearch={this.submitSearch}/>
+      <Watched watchedMovies={this.state.watchedMovies}/>
     </div>
     )
   }

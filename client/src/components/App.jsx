@@ -1,57 +1,72 @@
 import React from 'react';
-import Movies from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
 import Search from './Search.jsx';
+import MovieList from './MovieList.jsx';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       movieArray: [],
       movie: '',
       search: '',
     }
-    // this.updateQuery = this.updateQuery.bind(this);
-    this.addMovie = this.addMovieToList.bind(this);
+    this.updateMovie = this.updateMovie.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
     this.submitMovie = this.submitMovie.bind(this);
-    this.textInput = this.textInput.bind(this);
+    this.filterBySearch = this.filterBySearch.bind(this);
   }
+
   componentDidMount() {
     console.log('Mounted')
   }
-  // updateQuery(query) {
-  //   this.setState({query});
-  // }
-  addMovieToList(movie) {
-    this.setState({movies: [...this.state.movies, {title: movie}]});
-    }
 
-
-  submitSearch(search) {
-    const currentSearch = this.state.search;
-    search.preventDefault();
-    console.log('search submitted', currentSearch);
+  updateMovie(event) {
+    var currentValue = event.target.value;
+    this.setState({movie: currentValue});
   }
 
-  submitMovie(input) {
+  updateSearch(event) {
+    var currentValue = event.target.value;
+    this.setState({search: currentValue})
+  }
+
+  submitSearch(event) {
+    event.preventDefault();
+
+    var userMovies = this.state.movieArray;
+
+    var movieFilter = userMovies.filter(this.filterBySearch(userMovies));
+    console.log(movieFilter);
+  }
+
+  filterBySearch(array) {
+    var query = this.state.search;
+
+    for (var x = 0; x < array.length; x++) {
+      if (!array[x].title === query) {
+        return array[x];
+      }
+    }
+  }
+
+  submitMovie(event) {
+    event.preventDefault();
+
     let currentInput = this.state.movie;
     let currentArray = [];
     currentArray.push({title: currentInput});
 
-    input.preventDefault();
-
     if (currentInput.length > 0) {
       this.setState({movieArray: currentArray.concat(this.state.movieArray)});
     } else {
-      console.error('Invalid Movie Title');
     }
+    this.setState({movie: ''});
     console.log(this.state.movieArray);
   }
 
-  textInput(input) {
-    this.setState({[input.target.name]: input.target.value});
-  }
+
 
 
   render() {
@@ -59,9 +74,9 @@ class App extends React.Component {
     return (
     <div>
       <h1>Movie List</h1>
-      <AddMovie add={this.addMovie}/>
-      <Search updateQuery={this.udpateQuery}/>
-      <Movies />
+      <AddMovie updateMovie={this.updateMovie} movie={this.state.movie} submitMovie={this.submitMovie}/>
+      <Search updateSearch={this.updateSearch} search={this.state.search} submitSearch={this.submitSearch}/>
+      <MovieList movieArray={this.state.movieArray} submitSearch={this.submitSearch}/>
     </div>
     )
   }

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // make this a class component
-class Search extends Component {
+class Search extends React.Component {
   constructor() {
     super()
     this.state = {

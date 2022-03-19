@@ -1,15 +1,14 @@
 import React from 'react';
 import Movie from './Movie.jsx';
-// import movieArray from '../data/exampleMoviedata.js'
-// map individual movie list items to unsorted list
-// evaluate movie array for length
+
 
 const movieArray = [];
 
 const Movies = ({movies}) => {
+  console.log()
   console.log(movieArray.length);
   if (movieArray.length === 0) {
-    return <div>There Are No Movies By That Name!</div>
+    return <div>There Are No Movies On Your List</div>
   }
   return (
     <ul>

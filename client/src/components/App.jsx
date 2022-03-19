@@ -1,34 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Movies from './MovieList.jsx';
 import AddMovie from './AddMovie.jsx';
 import Search from './Search.jsx';
 
-class App extends Component {
+class App extends React.Component {
   constructor() {
     super();
-
     this.state = {
       movies: [],
       query: '',
     }
-    // bind methods to this
     this.updateQuery = this.updateQuery.bind(this);
     this.addMovie = this.addMovieToList.bind(this);
   }
-  // state update methods
+
   updateQuery(query) {
     this.setState({query});
   }
   addMovieToList(movie) {
-    this.setState({movies: [...this.state.movies, {title: movie}]}); // finish this method
+    this.setState({movies: [...this.state.movies, {title: movie}]});
     }
-  // default loading message
   componentDidMount() {
-    // console log can be removed, just a verification
     console.log('Mounted')
   }
-  // render elements to the page
-    // will individually render element from components
+
 
   render() {
     const {movies} = this.state;
@@ -37,7 +32,7 @@ class App extends Component {
       <h1>Movie List</h1>
       <AddMovie add={this.addMovie}/>
       <Search updateQuery={this.udpateQuery}/>
-      <Movies />
+      <Movies movies={this.state.movies}/>
     </div>
     )
   }

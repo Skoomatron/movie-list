@@ -1,23 +1,21 @@
 import React from 'react';
-// import movies from '../Data/exampleMovieData.js'
+import Movie from './Movie.jsx';
+// import movieArray from '../data/exampleMoviedata.js'
+// map individual movie list items to unsorted list
+// evaluate movie array for length
 
+const movieArray = [];
 
-
-
-const Movies = function() {
-  if (movies.length === 0) {
+const Movies = ({movies}) => {
+  console.log(movieArray.length);
+  if (movieArray.length === 0) {
     return <div>There Are No Movies By That Name!</div>
   }
   return (
     <ul>
-    {movies.map(movie => (
-      <Movie key={movie.title} movie={movie}/>
-    ))}
+    {movieArray.map(movie => (<Movie key={movie.title} movie={movie}/>))}
     </ul>
   )
 };
-
-
-
 
 export default Movies;

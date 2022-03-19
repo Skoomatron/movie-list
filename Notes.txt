@@ -1,0 +1,5 @@
+It is cleaner to render individual elements within component then pass them to the main component
+
+Remember to bind 'this' to component methods!
+
+Name field on form points to the state name you are looking at
